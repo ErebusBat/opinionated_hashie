@@ -27,5 +27,38 @@ describe Hashie::NamedArgsMash do
     it 'should allow keys not specified in defaults' do
       expect(subject[:two]).to eq 'two'
     end
-  end ### context #new
-end
+
+    it 'should require method_args' do
+      expect{ Hashie::NamedArgsMash.new }.to raise_error /wrong number of arguments/
+    end
+
+  end ### Context #new
+
+  context '#set_default' do
+
+    it 'should accept symbol key' do
+      subj = Hashie::NamedArgsMash.new({})
+      subj.set_default :item,  'value'
+      expect(subj.item).to eql 'value'
+    end
+
+    it 'should accept a string key' do
+      subj = Hashie::NamedArgsMash.new({})
+      subj.set_default 'item',  'value'
+      expect(subj.item).to eql  'value'
+    end
+
+    it 'should not overwrite value' do
+      subj = Hashie::NamedArgsMash.new({}, item: 'value')
+      subj.set_default :item,  'default'
+      expect(subj.item).to eql 'value'
+    end
+
+    it 'should not overwrite nil' do
+      subj = Hashie::NamedArgsMash.new({}, item: nil)
+      subj.set_default :item,  'default'
+      expect(subj.item).to be_nil
+    end
+
+  end ### Context #set_default
+end  ### Describe Hashie::NamedArgsMash
