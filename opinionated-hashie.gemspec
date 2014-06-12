@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'opinionated-hashie/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "opinionated-hashie"
+  spec.name          = "opinionated_hashie"
   spec.version       = Opinionated::Hashie::VERSION
   spec.authors       = ["Andrew Burns"]
   spec.email         = ["ErebusBat@gmail.com"]
